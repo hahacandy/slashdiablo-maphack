@@ -77,6 +77,16 @@ wchar_t* AnsiToUnicode(const char* str)
 	int len = MultiByteToWideChar(CODE_PAGE, 0, str, -1, buf, 0);
 	buf = new wchar_t[len];
 	MultiByteToWideChar(CODE_PAGE, 0, str, -1, buf, len);
+	for (DWORD i = 0; i < wcslen(buf); i++)
+	{
+		if ((buf[i] >= 0xFF || buf[i] == 0x79) && buf[i + 1] == L'c')
+		{
+			//if (name[i + 2] >= L'0' && name[i + 2] <= L':')
+			//{
+			buf[i] = L'\377';
+			//}
+		};
+	}
 	return buf;
 }
 
@@ -133,6 +143,16 @@ void PrintText(DWORD Color, char *szText, ...) {
 	va_end(Args); 
 	wchar_t Buffer[0x130];
 	MultiByteToWideChar(CODE_PAGE, 1, szBuffer, 152, Buffer, 304);
+	for (DWORD i = 0; i < wcslen(Buffer); i++)
+	{
+		if ((Buffer[i] >= 0xFF || Buffer[i] == 0x79) && Buffer[i + 1] == L'c')
+		{
+			//if (name[i + 2] >= L'0' && name[i + 2] <= L':')
+			//{
+			Buffer[i] = L'\377';
+			//}
+		};
+	}
 	D2CLIENT_PrintGameString(Buffer, Color);	
 }
 

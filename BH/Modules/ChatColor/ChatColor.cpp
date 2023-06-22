@@ -17,6 +17,16 @@ void Print(DWORD color, char* format, ...) {
 
 	wchar_t* wstr = new wchar_t[len];
 	MultiByteToWideChar(CODE_PAGE, 0, str, -1, wstr, len);
+	for (DWORD i = 0; i < wcslen(wstr); i++)
+	{
+		if ((wstr[i] >= 0xFF || wstr[i] == 0x79) && wstr[i + 1] == L'c')
+		{
+			//if (name[i + 2] >= L'0' && name[i + 2] <= L':')
+			//{
+			wstr[i] = L'\377';
+			//}
+		};
+	}
 	D2CLIENT_PrintGameString(wstr, color);
 	delete[] wstr;
 
