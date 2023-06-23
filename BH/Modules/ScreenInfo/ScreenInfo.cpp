@@ -17,8 +17,7 @@ map<std::string, Toggle> ScreenInfo::Toggles;
 
 void ScreenInfo::OnLoad() {
 	LoadConfig();
-
-	bhText = new Texthook(OutOfGame, 795, 6, BH_VERSION " (planqi Resurgence/Slash branch)");
+	bhText = new Texthook(OutOfGame, 795, 6, BH_VERSION " (planqi Resurgence/Slash branch/Thuban)");
 	bhText->SetAlignment(Right);
 	bhText->SetColor(Gold);
 
